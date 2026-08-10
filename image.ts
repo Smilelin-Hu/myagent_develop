@@ -15,9 +15,11 @@ const provider = createOpenAI({
 async function main() {
   const result = await generateText({
     // PackyAPI currently supports this model through Chat Completions.
-    model: provider.chat('gemini-2.5-flash-image'),
-    prompt: '一只戴着耳机写 TypeScript 程序的橘猫，温暖的室内光线，精致的数字插画',
+    model: provider.chat('gpt-image-2'),
+    prompt: '在成都闹市，驾驶ae86的熊猫，赛博朋克一点',
   });
+
+  console.log(result);
 
   const imageMatch = result.text.match(
     /data:image\/(png|jpe?g|webp);base64,([A-Za-z0-9+/=\r\n]+)/,
@@ -30,9 +32,11 @@ async function main() {
   }
 
   const imageBuffer = Buffer.from(imageMatch[2].replace(/\s/g, ''), 'base64');
-  fs.writeFileSync('output.png', imageBuffer);
+  fs.writeFileSync('output2.png', imageBuffer);
 
-  console.log(`图片已保存到 output.png（${imageBuffer.length} bytes）`);
+  console.log(`图片已保存到 output2.png（${imageBuffer.length} bytes）`);
 }
 
 main().catch(console.error);
+
+
